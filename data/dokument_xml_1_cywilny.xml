@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xPart xVersion="1.0" xLang="PL" xFromPg="1" xToPage="3" xFlag="crude" xVolType="14/502500/0001234/C" xYear="2023" xVolNmbr="001234" xDocType="Wyrok" xml:space="preserve">
+  <xName>Wyrok</xName>
+  <xBlock>
+    <xText>Sygn. akt III C 1234/23</xText>
+    <xUnit xIsTitle="true" xType="part" xBold="true">
+      <xName>WYROK</xName>
+      <xTitle>W IMIENIU RZECZYPOSPOLITEJ POLSKIEJ</xTitle>
+      <xText>Dnia 15 grudnia 2023 r.</xText>
+      <xText>Sąd Rejonowy w Warszawie w III Wydziale Cywilnym w składzie:</xText>
+      <xText>Przewodnicząca: SSR Anna Kowalczyk-Stefańska</xText>
+      <xText>Protokolant: Marta Zielińska</xText>
+      <xText>po rozpoznaniu w dniach: 10 października, 15 listopada, 15 grudnia 2023 r.</xText>
+      <xText>sprawy:</xText>
+      <xText><xBx>Jana Kowalskiego zamieszkałego w Krakowie przy ul. Adama Mickiewicza 15 m. 3</xBx></xText>
+      <xText><xBx>przeciwko</xBx></xText>
+      <xText><xBx>Przedsiębiorstwu Budowlanemu "Złota Rączka" Marek Stefański z siedzibą w Poznaniu</xBx></xText>
+      <xText><xBx>o zapłatę kwoty 85.000 zł wraz z odsetkami</xBx></xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">I</xName>
+      <xText>Zasądza od pozwanego Przedsiębiorstwa Budowlanego "Złota Rączka" Marek Stefański na rzecz powoda Jana Kowalskiego kwotę 85.000 zł (osiemdziesiąt pięć tysięcy złotych) wraz z odsetkami ustawowymi od dnia 30 lipca 2023 roku do dnia zapłaty</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">II</xName>
+      <xText>Zasądza od pozwanego na rzecz powoda zwrot kosztów procesu w wysokości 4.250 zł</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">III</xName>
+      <xText>Oddala powództwo w pozostałym zakresie</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="true" xType="part">
+      <xName>UZASADNIENIE</xName>
+      <xText>W dniu 15 marca 2023 roku strony zawarły umowę o roboty budowlane nr UM/2023/0156/KB dotyczącą wykonania remontu domu jednorodzinnego położonego w miejscowości Piaseczno przy ulicy Warszawskiej 234. Powód Jan Kowalski zlecił pozwanemu wykonanie kompleksowego remontu obejmującego wymianę instalacji elektrycznej, wodno-kanalizacyjnej oraz prace wykończeniowe.</xText>
+      
+      <xText>Zgodnie z zawartą umową pozwany zobowiązał się do wykonania prac w terminie do 30 czerwca 2023 roku za wynagrodzenie w wysokości 120.000 zł. Strony ustaliły, że płatności będą realizowane etapowo - 40% zaliczki po podpisaniu umowy, 30% po wykonaniu stanu surowego, a pozostałe 30% po zakończeniu wszystkich prac.</xText>
+      
+      <xText>Powód terminowo wpłacił zaliczkę w wysokości 48.000 zł na rachunek bankowy pozwanego w banku PKO Bank Polski S.A. Oddział w Poznaniu, nr konta 12 1020 3010 0000 4567 8901 2345. Drugą ratę w wysokości 36.000 zł powód wpłacił 20 maja 2023 roku po częściowym wykonaniu robót.</xText>
+      
+      <xText>Jednakże w toku realizacji umowy wystąpiły znaczące opóźnienia. Pozwany nie dotrzymał terminów wykonania poszczególnych etapów prac. Dodatkowo, jak wykazała ekspertyza techniczna sporządzona przez biegłego Mariana Kowalczyka z Izby Inżynierów Budownictwa w Warszawie, wykonane prace charakteryzowały się licznymi wadami i niezgodnościami z projektem budowlanym nr PB/2023/0789 sporządzonym przez architekt Zofię Adamczyk z Pracowni Projektowej "Dom Marzeń" w Warszawie.</xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Świadkowie:</xName>
+        <xText>1. Tomasz Wiśniewski, PESEL 78041234567, zamieszkały w Warszawie przy ul. Polnej 89, który pełnił nadzór techniczny podczas realizacji robót</xText>
+        <xText>2. Magdalena Kowalska, żona powoda, PESEL 87091245678, zamieszkała pod tym samym adresem co powód</xText>
+        <xText>3. Kierownik budowy Andrzej Malinowski, uprawnienia budowlane nr UPR/2018/1234, zatrudniony w firmie pozwanego</xText>
+      </xUnit>
+      
+      <xText>Sąd uznał za udowodnione, że pozwany istotnie naruszył postanowienia umowy poprzez wadliwe wykonanie robót budowlanych oraz niedotrzymanie terminów realizacji. Ekspertyza biegłego jednoznacznie wykazała, że wykonane prace nie odpowiadają standardom technicznym i normom budowlanym obowiązującym w Polsce.</xText>
+      
+      <xText>Zgodnie z orzecznictwem Sądu Najwyższego (wyrok z dnia 12 maja 2021 r., sygn. III CZP 15/21), wykonawca ponosi odpowiedzialność za wady robót budowlanych niezależnie od stopnia swojej staranności. W niniejszej sprawie pozwany nie tylko wykonał prace wadliwie, ale także nie podjął żadnych działań zmierzających do usunięcia defektów pomimo dwukrotnego wezwania.</xText>
+    </xUnit>
+    
+    <xText><xBx>Sędzia Anna Kowalczyk-Stefańska</xBx></xText>
+  </xBlock>
+</xPart>

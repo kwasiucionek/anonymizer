@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xPart xVersion="1.0" xLang="PL" xFromPg="1" xToPage="3" xFlag="crude" xVolType="14/502500/0000234/GC" xYear="2023" xVolNmbr="000234" xDocType="Wyrok" xml:space="preserve">
+  <xName>Wyrok</xName>
+  <xBlock>
+    <xText>Sygn. akt VIII GC 234/23</xText>
+    <xUnit xIsTitle="true" xType="part" xBold="true">
+      <xName>WYROK</xName>
+      <xTitle>W IMIENIU RZECZYPOSPOLITEJ POLSKIEJ</xTitle>
+      <xText>Dnia 18 grudnia 2023 r.</xText>
+      <xText>Sąd Okręgowy w Krakowie w VIII Wydziale Gospodarczym w składzie:</xText>
+      <xText>Przewodnicząca: SSO Anna Kowalska-Nowak</xText>
+      <xText>Protokolant: Piotr Malinowski</xText>
+      <xText>po rozpoznaniu w dniach: 15 października, 20 listopada, 18 grudnia 2023 r.</xText>
+      <xText>sprawy:</xText>
+      <xText><xBx>"TechnoSoft Solutions" Spółka z ograniczoną odpowiedzialnością z siedzibą w Warszawie przy ul. Marszałkowskiej 45/12, wpisana do Rejestru Przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS 0000123456, NIP 527-21-83-956, REGON 012345678</xBx></xText>
+      <xText><xBx>przeciwko</xBx></xText>
+      <xText><xBx>"Global Manufacturing Polska" Spółka Akcyjna z siedzibą w Krakowie przy al. Mickiewicza 156, wpisana do Rejestru Przedsiębiorców KRS pod numerem KRS 0000987654, NIP 678-321-54-09, REGON 987654321</xBx></xText>
+      <xText><xBx>o zapłatę wynagrodzenia za wykonane usługi informatyczne w wysokości 245.000 zł wraz z odsetkami</xBx></xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">I</xName>
+      <xText>Zasądza od pozwanej "Global Manufacturing Polska" S.A. na rzecz powoda "TechnoSoft Solutions" Sp. z o.o. kwotę 105.000 zł tytułem wynagrodzenia za wykonane usługi</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">II</xName>
+      <xText>Zasądza odsetki ustawowe od kwoty 105.000 zł od dnia 11 maja 2023 roku do dnia zapłaty</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">III</xName>
+      <xText>Zasądza od pozwanej na rzecz powoda zwrot kosztów procesu w wysokości 8.400 zł</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="true" xType="part">
+      <xName>UZASADNIENIE</xName>
+      <xText>W dniu 15 stycznia 2023 roku strony zawarły umowę o świadczenie usług informatycznych nr USI/2023/001/TechnoSoft, której przedmiotem było wdrożenie systemu ERP (Enterprise Resource Planning) w przedsiębiorstwie pozwanej.</xText>
+      
+      <xText>Powód "TechnoSoft Solutions" Sp. z o.o. zobowiązał się do:</xText>
+      <xText>1. Przeprowadzenia analizy potrzeb informatycznych pozwanej</xText>
+      <xText>2. Dostosowania systemu SAP Business One do specyfiki działalności pozwanej</xText>
+      <xText>3. Wdrożenia modułów: księgowość, kadry i płace, magazyn, sprzedaż, zakupy</xText>
+      <xText>4. Przeprowadzenia szkoleń dla 25 pracowników pozwanej</xText>
+      <xText>5. Zapewnienia wsparcia technicznego przez okres 12 miesięcy</xText>
+      
+      <xText>Pozwana "Global Manufacturing Polska" S.A. zobowiązała się do zapłaty wynagrodzenia w wysokości 350.000 zł według następującego harmonogramu:</xText>
+      <xText>- 30% (105.000 zł) - zaliczka po podpisaniu umowy</xText>
+      <xText>- 40% (140.000 zł) - po zakończeniu fazy analizy i konfiguracji systemu</xText>
+      <xText>- 30% (105.000 zł) - po wdrożeniu systemu i przeprowadzeniu szkoleń</xText>
+      
+      <xText>Realizacja umowy przebiegała zgodnie z ustalonym harmonogramem. W dniu 20 stycznia 2023 roku pozwana przekazała zaliczkę w wysokości 105.000 zł na rachunek bankowy powoda w Banku Millennium S.A. Oddział Warszawa Centrum, nr konta 11 1160 2202 0000 0003 5678 9012.</xText>
+      
+      <xText>Pierwsza faza projektu obejmująca analizę procesów biznesowych pozwanej została zakończona zgodnie z terminami określonymi w harmonogramie realizacji projektu nr HR/2023/001 sporządzonym przez kierownika projektu mgr inż. Krzysztofa Malinowskiego, certyfikowanego konsultanta SAP (certyfikat nr SAP-C-123456).</xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Świadkowie:</xName>
+        <xText>1. Mgr inż. Krzysztof Malinowski, kierownik projektu po stronie powoda</xText>
+        <xText>2. Anna Stefańska, trener SAP</xText>
+        <xText>3. Tomasz Kowalczyk, administrator IT po stronie pozwanej</xText>
+        <xText>4. Magdalena Wiśniewska, główna księgowa pozwanej</xText>
+      </xUnit>
+      
+      <xText>Na wniosek powoda Sąd powołał biegłego z zakresu informatyki, dr inż. Marcina Kowalskiego z Politechniki Krakowskiej, Katedra Informatyki Stosowanej, w celu zbadania spornych kwestii technicznych.</xText>
+      
+      <xText>Ekspertyza techniczna nr ET/2023/089 z dnia 15 września 2023 roku wykazała:</xText>
+      <xText>1. System SAP Business One został poprawnie wdrożony zgodnie z najlepszymi praktykami branżowymi</xText>
+      <xText>2. Wszystkie moduły funkcjonują prawidłowo i spełniają wymagania określone w specyfikacji technicznej</xText>
+      <xText>3. Problemy zgłaszane przez pozwaną wynikają z nieodpowiednich ustawień infrastruktury IT po stronie pozwanej, a nie z wad systemu</xText>
+      <xText>4. Integracja z urządzeniami produkcyjnymi wymaga dodatkowych prac wykraczających poza zakres umowy podstawowej</xText>
+      <xText>5. Szkolenia zostały przeprowadzone zgodnie z programem i standardami branżowymi</xText>
+      
+      <xText>Po zakończeniu szkoleń, w dniu 20 kwietnia 2023 roku powód przekazał pozwanej dokumentację techniczną systemu oraz certyfikat zgodności wdrożenia nr CW/2023/GMP/001. Równocześnie została uruchomiona linia wsparcia technicznego dostępna pod numerem telefonu 022-123-4567 oraz adresem e-mail: support@technosoft.pl.</xText>
+      
+      <xText>Zgodnie z postanowieniami umowy, w dniu 25 kwietnia 2023 roku powód wystawił pozwanej fakturę VAT nr FV/2023/0156 na kwotę 105.000 zł za wykonanie III etapu projektu (wdrożenie i szkolenia). Faktura została przesłana elektronicznie oraz doręczona pocztą poleconym listem pod adres siedziby pozwanej.</xText>
+      
+      <xText>Termin płatności faktury, zgodnie z warunkami umowy, upływał w dniu 10 maja 2023 roku. Jednakże pozwana nie dokonała płatności w wyznaczonym terminie.</xText>
+      
+      <xText>Pozwana w odpowiedzi z dnia 2 czerwca 2023 roku zakwestionowała jakość wykonanych usług, zarzucając powodowi niestabilne działanie systemu, niewystarczające przeszkolenie pracowników oraz problemy z integracją systemu z urządzeniami produkcyjnymi.</xText>
+      
+      <xText>Sąd uznał, że powód wykonał swoje zobowiązania umowne w sposób należyty. Ekspertyza biegłego jednoznacznie potwierdziła, że system został wdrożony zgodnie ze sztuką i najlepszymi praktykami branżowymi. Zarzuty pozwanej dotyczące wad systemu nie znalazły potwierdzenia w materiale dowodowym.</xText>
+      
+      <xText>Problemy techniczne zgłaszane przez pozwaną wynikają z czynników pozostających poza kontrolą powoda i nie mogą stanowić podstawy do odmowy zapłaty należności.</xText>
+    </xUnit>
+    
+    <xText><xBx>Sędzia Anna Kowalska-Nowak</xBx></xText>
+  </xBlock>
+</xPart>

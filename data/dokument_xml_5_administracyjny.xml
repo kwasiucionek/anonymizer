@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xPart xVersion="1.0" xLang="PL" xFromPg="1" xToPage="3" xFlag="crude" xVolType="14/502500/0000456/SA" xYear="2023" xVolNmbr="000456" xDocType="Wyrok" xml:space="preserve">
+  <xName>Wyrok</xName>
+  <xBlock>
+    <xText>Sygn. akt II SA/Gd 456/23</xText>
+    <xUnit xIsTitle="true" xType="part" xBold="true">
+      <xName>WYROK</xName>
+      <xTitle>W IMIENIU RZECZYPOSPOLITEJ POLSKIEJ</xTitle>
+      <xText>Dnia 28 listopada 2023 r.</xText>
+      <xText>Wojewódzki Sąd Administracyjny w Gdańsku w II Wydziale w składzie:</xText>
+      <xText>Przewodnicząca: SSA Anna Kowalska-Stefańska</xText>
+      <xText>Sędzia: SSA Piotr Wiśniewski</xText>
+      <xText>Sędzia: SSA Krzysztof Zieliński</xText>
+      <xText>Protokolant: Tomasz Malinowski</xText>
+      <xText>po rozpoznaniu w dniu 28 listopada 2023 r.</xText>
+      <xText>sprawy:</xText>
+      <xText><xBx>Jana Kowalskiego, PESEL 75031234567, zamieszkałego w Sopocie przy ul. Morskiej 15/3, reprezentowanego przez radcę prawnego Annę Wiśniewską</xBx></xText>
+      <xText><xBx>przeciwko</xBx></xText>
+      <xText><xBx>Wojewodzie Pomorskiemu w Gdańsku</xBx></xText>
+      <xText><xBx>o uchylenie rozstrzygnięcia nadzorczego w sprawie pozwolenia na budowę</xBx></xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Organy:</xName>
+        <xText>Organ I instancji: Burmistrz Miasta Sopot, ul. Kościuszki 25/27, 81-704 Sopot</xText>
+        <xText>Organ II instancji: Samorządowe Kolegium Odwoławcze w Gdańsku, ul. Okopowa 21/27, 80-810 Gdańsk</xText>
+      </xUnit>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">I</xName>
+      <xText>Uchyla rozstrzygnięcie nadzorcze Wojewody Pomorskiego z dnia 20 czerwca 2023 roku, znak: PN-III.7030.1.2023.MK</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">II</xName>
+      <xText>Zasądza od Skarbu Państwa - Wojewody Pomorskiego na rzecz skarżącego zwrot kosztów postępowania w wysokości 1.200 zł</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="true" xType="part">
+      <xName>UZASADNIENIE</xName>
+      <xText>Skarżący Jan Kowalski jest właścicielem nieruchomości położonej w Sopocie przy ul. Bursztynowej 67, stanowiącej działkę nr 45/12 o powierzchni 1.200 m², wpisanej do księgi wieczystej nr GD1S/00123456/7 prowadzonej przez Sąd Rejonowy w Gdańsku. Nieruchomość została nabyta na podstawie umowy kupna-sprzedaży zawartej w dniu 15 października 2020 roku przed notariusz Krystyną Malinowską prowadzącą Kancelarię Notarialną w Sopocie przy ul. Bohaterów Monte Cassino 23.</xText>
+      
+      <xText>W dniu 15 grudnia 2022 roku skarżący złożył w Urzędzie Miasta Sopot wniosek o wydanie pozwolenia na budowę domu jednorodzinnego wraz z garażem i gospodarstwem pomocniczym. Do wniosku dołączył projekt budowlany sporządzony przez architekt Zofię Adamczyk, uprawniona budowlana w specjalności architektonicznej, nr uprawnień 246/WAW/89, z Pracowni Projektowej "Dom Marzeń" w Warszawie przy ul. Krakowskie Przedmieście 26/28.</xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Parametry projektowanego budynku:</xName>
+        <xText>- Powierzchnia zabudowy: 180 m²</xText>
+        <xText>- Powierzchnia użytkowa: 220 m²</xText>
+        <xText>- Wysokość: 9,5 m (parter + poddasze użytkowe)</xText>
+        <xText>- Garaż: powierzchnia 25 m²</xText>
+        <xText>- Gospodarstwo pomocnicze: powierzchnia 15 m²</xText>
+      </xUnit>
+      
+      <xText>Projekt był zgodny z miejscowym planem zagospodarowania przestrzennego miasta Sopot uchwalonym uchwałą nr XV/234/2019 Rady Miasta Sopot z dnia 28 listopada 2019 roku w sprawie miejscowego planu zagospodarowania przestrzennego dla rejonu ul. Bursztynowej.</xText>
+      
+      <xText>Po otrzymaniu wszystkich wymaganych uzgodnień, Burmistrz Miasta Sopot decyzją z dnia 12 marca 2023 roku, znak: ROS.6740.3.2023 wydał skarżącemu pozwolenie na budowę. Decyzja została doręczona skarżącemu w dniu 15 marca 2023 roku.</xText>
+      
+      <xText>W dniu 25 marca 2023 roku od wydanej decyzji odwołanie złożył Tomasz Nowak, PESEL 68021234567, właściciel nieruchomości sąsiadującej (działka nr 45/11), reprezentowany przez adwokata Krzysztofa Malinowskiego z Kancelarii Adwokackiej w Gdańsku.</xText>
+      
+      <xText>Samorządowe Kolegium Odwoławcze w Gdańsku, po przeprowadzeniu postępowania odwoławczego, decyzją z dnia 15 maja 2023 roku, znak: SKO-III.7030.25.2023 utrzymało w mocy decyzję organu I instancji. W uzasadnieniu SKO wskazało, że projektowany budynek spełnia wymagania określone w przepisach prawa budowlanego.</xText>
+      
+      <xText>Wojewoda Pomorski, po przeprowadzeniu postępowania nadzorczego, rozstrzygnięciem nadzorczym z dnia 20 czerwca 2023 roku, znak: PN-III.7030.1.2023.MK uchylił decyzje obu instancji, uznając za zasadne zarzuty dotyczące naruszenia przepisów prawa budowlanego.</xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Świadkowie:</xName>
+        <xText>1. Arch. Zofia Adamczyk, projektant budynku</xText>
+        <xText>2. Magdalena Wiśniewska, główny specjalista ds. pozwoleń budowlanych</xText>
+        <xText>3. Piotr Zieliński, geodeta sporządzający mapę sytuacyjno-wysokościową</xText>
+      </xUnit>
+      
+      <xText>Sąd powołał biegłego z zakresu budownictwa, dr inż. Mariusza Stefańskiego z Politechniki Gdańskiej, Wydziału Inżynierii Lądowej i Środowiska, w celu zbadania zgodności projektu budowlanego z obowiązującymi przepisami.</xText>
+      
+      <xText>Opinia biegłego nr OB/2023/234 z dnia 10 października 2023 roku wykazała, że:</xText>
+      <xText>1. Projekt budowlany spełnia wszystkie wymagania określone w Prawie budowlanym oraz rozporządzeniach wykonawczych</xText>
+      <xText>2. Odległości od granic działki są prawidłowe i wynoszą: od północy 4,5 m, od południa 6,2 m, od wschodu 8,1 m, od zachodu 5,8 m</xText>
+      <xText>3. Warunki przeciwpożarowe zostały prawidłowo zaprojektowane zgodnie z § 267-275 rozporządzenia w sprawie warunków technicznych</xText>
+      <xText>4. Uzgodnienia z gestorami sieci są wystarczające i kompletne</xText>
+      
+      <xText>Sąd uznał skargę za zasadną. Rozstrzygnięcie nadzorcze Wojewody Pomorskiego zostało wydane z naruszeniem prawa.</xText>
+      
+      <xText>Po pierwsze, Wojewoda przekroczył granice nadzoru administracyjnego określone w art. 79 ust. 1 ustawy o samorządzie gminnym. Sprawa została załatwiona ostatecznie przez Samorządowe Kolegium Odwoławcze, a podstawy do wznowienia postępowania lub stwierdzenia nieważności decyzji nie zachodziły.</xText>
+      
+      <xText>Po drugie, zarzuty podniesione przez Wojewodę w rozstrzygnięciu nadzorczym nie znalazły potwierdzenia w materiale dowodowym. Opinia biegłego jednoznacznie wykazała zgodność projektu budowlanego z obowiązującymi przepisami prawa budowlanego.</xText>
+      
+      <xText>Po trzecie, Wojewoda nie wskazał konkretnych przepisów prawa, które miały zostać naruszone przez organy obu instancji, co stanowi naruszenie art. 107 § 3 k.p.a.</xText>
+      
+      <xText>Rozstrzygnięcie nadzorcze zostało wydane z rażącym naruszeniem prawa, co uzasadnia jego uchylenie przez Sąd.</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName>POUCZENIE:</xName>
+      <xText>Na niniejszy wyrok przysługuje skarga kasacyjna do Naczelnego Sądu Administracyjnego w terminie 30 dni od dnia doręczenia wyroku wraz z uzasadnieniem. Skargę kasacyjną wnosi się za pośrednictwem Wojewódzkiego Sądu Administracyjnego w Gdańsku.</xText>
+    </xUnit>
+    
+    <xText><xBx>Sędzia Anna Kowalska-Stefańska</xBx></xText>
+    <xText><xBx>W rozprawie uczestniczyli:</xBx></xText>
+    <xText><xBx>- Sędzia sprawozdawca Anna Kowalska-Stefańska</xBx></xText>
+    <xText><xBx>- Sędzia Piotr Wiśniewski</xBx></xText>
+    <xText><xBx>- Sędzia Krzysztof Zieliński</xBx></xText>
+  </xBlock>
+</xPart>

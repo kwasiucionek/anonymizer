@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xPart xVersion="1.0" xLang="PL" xFromPg="1" xToPage="3" xFlag="crude" xVolType="14/502500/0000789/K" xYear="2023" xVolNmbr="000789" xDocType="Wyrok" xml:space="preserve">
+  <xName>Wyrok</xName>
+  <xBlock>
+    <xText>Sygn. akt II K 789/23</xText>
+    <xUnit xIsTitle="true" xType="part" xBold="true">
+      <xName>WYROK</xName>
+      <xTitle>W IMIENIU RZECZYPOSPOLITEJ POLSKIEJ</xTitle>
+      <xText>Dnia 10 października 2023 r.</xText>
+      <xText>Sąd Rejonowy w Gdańsku w II Wydziale Karnym w składzie:</xText>
+      <xText>Przewodniczący: SSR Krzysztof Malinowski</xText>
+      <xText>Protokolant: Joanna Zielińska</xText>
+      <xText>po rozpoznaniu w dniach: 15 sierpnia, 10 września, 10 października 2023 r.</xText>
+      <xText>sprawy:</xText>
+      <xText><xBx>Marka Stefańskiego, ur. 12 sierpnia 1988 r. w Pile, syna Janusza i Marii z domu Kowalska, PESEL 88081245632, legitymującego się dowodem osobistym seria AKC nr 123456, zamieszkałego w Koninie przy ul. Słowackiego 7 m. 12</xBx></xText>
+      <xText><xBx>oskarżonego o to, że</xBx></xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName xSffx=".">I</xName>
+        <xText>w nocy z 19 na 20 kwietnia 2023 roku, około godziny 2:30, w Gdańsku przy ul. Grunwaldzkiej 123, włamał się do sklepu elektronicznego "MediaWorld" Sp. z o.o. poprzez wybicie szyby w oknie od strony podwórka przy użyciu kamienia, a następnie skradł mienie o łącznej wartości 11.736 zł, w tym: smartfon Apple iPhone 14 Pro, laptop Dell Inspiron 15 3000, tablet Samsung Galaxy Tab S8, słuchawki bezprzewodowe Sony WH-1000XM4 oraz gotówkę z kasy fiskalnej</xText>
+      </xUnit>
+      
+      <xText>tj. o czyn z art. 279 § 1 k.k. w zw. z art. 278 § 1 k.k.</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">I</xName>
+      <xText>Uznaje oskarżonego Marka Stefańskiego winnym popełnienia zarzucanego mu czynu i wymierza mu karę 2 lat pozbawienia wolności</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">II</xName>
+      <xText>Na podstawie art. 69 § 1 k.k. wykonanie orzeczonej kary pozbawienia wolności warunkowo zawiesza na okres próby 3 lat</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">III</xName>
+      <xText>Na podstawie art. 46 § 1 k.k. orzeka od oskarżonego na rzecz Skarbu Państwa grzywnę w wysokości 5.000 zł</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">IV</xName>
+      <xText>Na podstawie art. 615 § 1 k.p.k. zasądza od oskarżonego na rzecz Skarbu Państwa zwrot kosztów postępowania w wysokości 300 zł</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="true" xType="part">
+      <xName>UZASADNIENIE</xName>
+      <xText>W nocy z 19 na 20 kwietnia 2023 roku, około godziny 2:30, oskarżony Marek Stefański włamał się do sklepu elektronicznego "MediaWorld" Sp. z o.o. z siedzibą w Warszawie, NIP 527-21-83-956, prowadzącego punkt sprzedaży przy ul. Grunwaldzkiej 123 w Gdańsku.</xText>
+      
+      <xText>Sposób działania oskarżonego został szczegółowo zarejestrowany przez system monitoringu składający się z 8 kamer CCTV marki Hikvision, model DS-2CD2143G0-I, zainstalowanych na terenie sklepu oraz w jego otoczeniu. Analiza nagrań przeprowadzona przez biegłego z zakresu informatyki śledczej, mgr inż. Piotra Kowalczyka z Politechniki Gdańskiej, wykazała następujący przebieg zdarzenia:</xText>
+      
+      <xText>Oskarżony przybył na miejsce samochodem marki Volkswagen Golf, rocznik 2015, kolor srebrny, nr rejestracyjny GDA 12AB, VIN WVWZZZ1KZEW123456. Pojazd zaparkował w odległości około 50 metrów od sklepu, przy ul. Partyzantów. Następnie pieszo udał się w kierunku budynku sklepu.</xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Świadkowie:</xName>
+        <xText>1. Andrzej Zieliński, PESEL 75031298765, pracownik ochrony, który pierwszy zauważył włamanie</xText>
+        <xText>2. Krzysztof Wiśniewski, właściciel sklepu, PESEL 69120587432</xText>
+        <xText>3. Katarzyna Malinowska, PESEL 83050756789, mieszkanka kamienicy przy ul. Grunwaldzkiej 121</xText>
+        <xText>4. Tomasz Nowak, PESEL 79081234567, mechanik z warsztatu samochodowego "Auto-Serwis"</xText>
+      </xUnit>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Ekspertyzy:</xName>
+        <xText>1. Ekspertyza daktyloskopjna sporządzona przez Centralne Laboratorium Kryminalistyczne Policji w Warszawie, biegły Marek Kowalczyk, wykazała zgodność śladów linii papilarnych zabezpieczonych na miejscu zdarzenia ze śladami oskarżonego.</xText>
+        <xText>2. Analiza nagrań z monitoringu przeprowadzona przez mgr inż. Piotra Kowalczyka z Politechniki Gdańskiej potwierdziła tożsamość sprawcy oraz przebieg zdarzenia.</xText>
+        <xText>3. Opinia psychiatryczna sporządzona przez dr med. Annę Wiśniewską ze Szpitala Psychiatrycznego w Gdańsku wykazała, że oskarżony w chwili czynu był w pełni poczytalny.</xText>
+      </xUnit>
+      
+      <xText>Sąd uznał winę oskarżonego Marka Stefańskiego popełnienia czynu zarzucanego mu w akcie oskarżenia. Zebrany w sprawie materiał dowodowy w sposób jednoznaczny potwierdza, że oskarżony w dniu 20 kwietnia 2023 roku dokonał kradzieży z włamaniem mienia o znacznej wartości.</xText>
+      
+      <xText>Przestępstwo zostało popełnione w sposób zaplanowany, co potwierdza analiza nagrań monitoringu. Oskarżony wcześniej obserwował obiekt, wybrał odpowiednią porę nocną oraz przygotował sposób dostania się do wnętrza sklepu.</xText>
+      
+      <xText>Przyznanie się oskarżonego do winy oraz jego dotychczasowa niekaralność zostały uznane za okoliczności łagodzące. Jednocześnie znaczną wartość skradzionego mienia oraz społeczną szkodliwość czynu Sąd potraktował jako okoliczności obciążające.</xText>
+    </xUnit>
+    
+    <xText><xBx>Sędzia Krzysztof Malinowski</xBx></xText>
+  </xBlock>
+</xPart>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xPart xVersion="1.0" xLang="PL" xFromPg="1" xToPage="3" xFlag="crude" xVolType="14/502500/0000456/RC" xYear="2023" xVolNmbr="000456" xDocType="Wyrok" xml:space="preserve">
+  <xName>Wyrok</xName>
+  <xBlock>
+    <xText>Sygn. akt I RC 456/23</xText>
+    <xUnit xIsTitle="true" xType="part" xBold="true">
+      <xName>WYROK</xName>
+      <xTitle>W IMIENIU RZECZYPOSPOLITEJ POLSKIEJ</xTitle>
+      <xText>Dnia 20 listopada 2023 r.</xText>
+      <xText>Sąd Rejonowy w Lublinie w I Wydziale Rodzinnym i Nieletnich w składzie:</xText>
+      <xText>Przewodnicząca: SSR Anna Stefańska</xText>
+      <xText>Protokolant: Marek Wiśniewski</xText>
+      <xText>po rozpoznaniu w dniach: 15 września, 20 października, 20 listopada 2023 r.</xText>
+      <xText>sprawy:</xText>
+      <xText><xBx>Anny Kowalskiej z domu Wiśniewskiej, ur. 25 marca 1985 r. w Zamościu, córki Andrzeja i Marii z domu Nowak, PESEL 85032512345, zamieszkałej w Lublinie przy ul. Krakowskie Przedmieście 15 m. 4</xBx></xText>
+      <xText><xBx>przeciwko</xBx></xText>
+      <xText><xBx>Tomaszowi Kowalskiemu, ur. 8 listopada 1982 r. w Lublinie, synowi Stanisława i Jadwigi z domu Zielińska, PESEL 82110823456, zamieszkałemu w Lublinie przy ul. Lipowej 89/7</xBx></xText>
+      <xText><xBx>o rozwód małżeństwa, ustalenie władzy rodzicielskiej nad dziećmi małoletnimi oraz wysokości alimentów</xBx></xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Dzieci małoletnie:</xName>
+        <xText>1. Karolina Kowalska, ur. 12 maja 2010 r. w Lublinie, PESEL 10051234567</xText>
+        <xText>2. Michał Kowalski, ur. 3 września 2013 r. w Lublinie, PESEL 13090334568</xText>
+      </xUnit>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">I</xName>
+      <xText>Rozwodzi małżeństwo Anny Kowalskiej z Tomaszem Kowalskim zawarte w dniu 20 czerwca 2009 r. z winy pozwanego</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">II</xName>
+      <xText>Powierza sprawowanie władzy rodzicielskiej nad córką Karoliną Kowalską oraz synem Michałem Kowalskim powódce Annie Kowalskiej</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">III</xName>
+      <xText>Zasądza od pozwanego na rzecz powódki alimenty na dzieci w wysokości 1.200 zł miesięcznie, płatne do 10 dnia każdego miesiąca</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">IV</xName>
+      <xText>Ustala kontakty pozwanego z dziećmi w każdy drugi weekend od piątku godz. 18:00 do niedzieli godz. 18:00 pod warunkiem, że pozwany będzie trzeźwy</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="false" xType="none">
+      <xName xSffx=".">V</xName>
+      <xText>Orzeka podział majątku wspólnego zgodnie z załączonym protokołem podziału</xText>
+    </xUnit>
+    
+    <xUnit xIsTitle="true" xType="part">
+      <xName>UZASADNIENIE</xName>
+      <xText>Strony zawarły związek małżeński w dniu 20 czerwca 2009 roku przed Urzędem Stanu Cywilnego w Lublinie, akt ślubu nr 145/2009. Z małżeństwa pochodzą dwoje dzieci małoletnich: Karolina Kowalska (13 lat) oraz Michał Kowalski (10 lat).</xText>
+      
+      <xText>Początkowo małżeństwo układało się harmonijnie. Strony wspólnie prowadzili gospodarstwo domowe, wychowywali dzieci i rozwijali swoje kariery zawodowe. W 2012 roku nabyli wspólnie mieszkanie w Lublinie przy ul. Krakowskie Przedmieście 15/4 na podstawie umowy kupna-sprzedaży zawartej u notariusz Krystyny Malinowskiej (Kancelaria Notarialna w Lublinie, ul. Spokojna 45).</xText>
+      
+      <xText>Problemy w związku zaczęły się około 2019 roku. Pozwany Tomasz Kowalski zaczął nadużywać alkoholu, co prowadziło do częstych kłótni i konfliktów w domu. Sytuacja znacznie pogorszyła się podczas pandemii COVID-19, gdy pozwany stracił pracę w firmie "TechnoStroy" Sp. z o.o. w Lublinie i przez kilka miesięcy pozostawał bezrobotny.</xText>
+      
+      <xText>W dniu 15 października 2021 roku doszło do incydentu, w wyniku którego powódka doznała obrażeń w postaci siniaków na twarzy i przedramionach. Zdarzenie zostało zgłoszone na Policję (Komisariat Policji w Lublinie, ul. Krochmalna 2), gdzie sporządzono notatkę służbową nr 123/2021. Powódka została przebadana przez lekarza w Szpitalu Klinicznym nr 4 w Lublinie przy ul. Jaczewskiego 8, który stwierdził obrażenia ciała jak w zaświadczeniu lekarskim nr ZL/2021/789.</xText>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Świadkowie:</xName>
+        <xText>1. Magdalena Wiśniewska, PESEL 75041245678, sąsiadka</xText>
+        <xText>2. Dr Anna Zielińska, psycholog prowadząca terapię rodzinną</xText>
+        <xText>3. Andrzej Wiśniewski, PESEL 65021298765, rodzic powódki</xText>
+        <xText>4. Krystyna Kowalska, PESEL 58031287654, matka pozwanego</xText>
+        <xText>5. Joanna Malinowska, PESEL 79051234567, koleżanka powódki z pracy</xText>
+      </xUnit>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Ekspertyzy i opinie:</xName>
+        <xText>1. Opinia psychologiczna dzieci sporządzona przez dr Katarzynę Nowak z dnia 15.05.2023 r.</xText>
+        <xText>2. Zaświadczenia lekarskie o przebytych obrażeniach powódki</xText>
+        <xText>3. Wycena nieruchomości sporządzona przez rzeczoznawcę majątkowego Piotra Zielińskiego</xText>
+        <xText>4. Analiza sytuacji finansowej stron sporządzona przez biegłego księgowego Marka Kowalczyka</xText>
+      </xUnit>
+      
+      <xUnit xIsTitle="false" xType="none">
+        <xName>Sytuacja majątkowa:</xName>
+        <xText>Majątek wspólny małżonków obejmuje:</xText>
+        <xText>1. Mieszkanie przy ul. Krakowskie Przedmieście 15/4 o powierzchni 78 m², wpisane do księgi wieczystej nr LU1L/00123456/7, wartość szacunkowa 450.000 zł, obciążone hipoteką w wysokości 180.000 zł</xText>
+        <xText>2. Samochód Toyota Corolla, rocznik 2018, nr rej. LLU 567AB, VIN JTDBR32E630123456, wartość 65.000 zł</xText>
+        <xText>3. Oszczędności na rachunku bankowym w PKO Bank Polski S.A. w wysokości 25.000 zł</xText>
+        <xText>4. Wyposażenie mieszkania o wartości około 40.000 zł</xText>
+      </xUnit>
+      
+      <xText>Opinia psychologiczna nr OP/2023/156 z dnia 15 maja 2023 roku wskazuje, że dzieci są silnie przywiązane do matki i czują się przy niej bezpiecznie. Równocześnie wyrażają obawy przed kontaktami z ojcem ze względu na jego nieprzewidywalne zachowania pod wpływem alkoholu.</xText>
+      
+      <xText>Sąd uznał za udowodnione, że pozwany dopuścił się przemocy domowej wobec powódki, co stanowi podstawę do orzeczenia rozwodu z jego winy. Wobec dobra dzieci oraz ich bezpieczeństwa, Sąd powierzył sprawowanie władzy rodzicielskiej wyłącznie powódce, ograniczając kontakty pozwanego z dziećmi do weekendów pod warunkiem trzeźwości.</xText>
+    </xUnit>
+    
+    <xText><xBx>Sędzina Anna Stefańska</xBx></xText>
+  </xBlock>
+</xPart>
