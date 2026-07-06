@@ -1,18 +1,24 @@
 # Anonimizator dokumentów prawnych z modelem NER
 
-System automatycznej anonimizacji polskich dokumentów prawnych wykorzystujący model **polish-roberta-8k** z fine-tuningiem do Named Entity Recognition (NER).
+System automatycznej anonimizacji polskich dokumentów prawnych wykorzystujący
+model **polish-roberta-8k** z fine-tuningiem do Named Entity Recognition (NER)
+oraz **Morfeusz 2** do normalizacji odmian nazwisk. Dostępny jako skrypt CLI
+(`anonymizer.py`) oraz **Web UI w Django** (upload, kolejka w tle,
+zatrzymywanie, podgląd wyników, sprawy z wykazem osób).
 
 ## 📋 Spis treści
 
 - [Charakterystyka](#-charakterystyka)
 - [Struktura projektu](#-struktura-projektu)
-- [Wymagania](#-wymagania)
-- [Instalacja](#-instalacja)
-- [Użycie - Anonimizacja](#-użycie---anonimizacja)
-- [Użycie - Testy](#-użycie---testy)
-- [Użycie - Trening modelu](#-użycie---trening-modelu)
-
-
+- [Wymagania i instalacja](#-wymagania-i-instalacja)
+- [Użycie — CLI](#-użycie--cli)
+- [Web UI (Django)](#-web-ui-django)
+  - [Architektura](#architektura)
+  - [Uruchomienie deweloperskie](#uruchomienie-deweloperskie)
+  - [Zatrzymywanie przetwarzania](#zatrzymywanie-przetwarzania)
+  - [Wdrożenie (systemd / nginx)](#wdrożenie-systemd--nginx)
+  - [Zmienne środowiskowe](#zmienne-środowiskowe)
+- [Trening modelu](#-trening-modelu)
 
 ---
 
@@ -24,25 +30,32 @@ Model wykrywa 4 kategorie danych osobowych:
 
 | Kategoria | Opis | Przykład wejścia | Przykład wyjścia |
 |-----------|------|------------------|------------------|
-| **PERSON** | Imiona i nazwiska osób fizycznych lub pojedyńcze nazwisko | Jan Kowalski | `<xAnon xSubst="B. Z.">Jan Kowalski</xAnon>` |
-| **LOCATION** | Miejscowości i lokalizacje, ale tylko te pisane dużą literą i w formie przymiotnika | Warszawa | `<xAnon xSubst="W.">Warszawa</xAnon>` |
-| **PRODUCT** | Nazwy produktów  | `<xAnon xSubst=" A. (...)">Audi Q6</xAnon>` |
-| **SENSITIVE** | Pozostałe dane wrażliwe, np.: PESEL, telefony, daty urodzenia, także nazwy województw, gmin i inne przymiotnikowe określenia (np. województwo wielkopolskie > województwo), organizacje i firmy  | 92010112345 | `<xAnon xSubst="(...)">92010112345</xAnon>` |
+| **PERSON** | Imiona i nazwiska osób fizycznych lub pojedyncze nazwisko | Jan Kowalski | `<xAnon xSubst='J. K.'>Jan Kowalski</xAnon>` |
+| **LOCATION** | Miejscowości i lokalizacje (pisane dużą literą, także w formie przymiotnika) | Warszawa | `<xAnon xSubst='W.'>Warszawa</xAnon>` |
+| **PRODUCT** | Nazwy produktów | Audi Q6 | `<xAnon xSubst='A. (...)'>Audi Q6</xAnon>` |
+| **SENSITIVE** | Pozostałe dane wrażliwe: PESEL, telefony, daty urodzenia, nazwy województw i gmin, organizacje i firmy | 92010112345 | `<xAnon xSubst='(...)'>92010112345</xAnon>` |
 
 ### Zasady anonimizacji
-"
-✅ **PERSON** - inicjały przesunięte według Szyfru Cezara (np. o 2 - "Jan Kowalski" → "L. M.")  
-✅ **LOCATION** - Pierwsza litera (np. "Warszawa" → "W.")  
-✅ **PRODUCT** - Pierwsza litera (np. "Audi" → "A.") lub dla wyrażeń wieloczłonowych: pierwsza litera + (...) np. "Super Ekstra Krem" → S. (...)    
-✅ **SENSITIVE** - Zastąpienie "(...)"  
+
+- **PERSON** — inicjały („Jan Kowalski” → „J. K.”); opcja `--shift N` przesuwa
+  litery szyfrem Cezara (np. `--shift 2`: „Jan Kowalski” → „L. M.”).
+  Różne osoby o tych samych inicjałach dostają licznik: „J. K. (1)”,
+  „J. K. (2)” — a gdy inicjały są w dokumencie unikalne, post-processing
+  zdejmuje zbędne „(1)”. Odmiany tego samego nazwiska („Jana Kowalskiego”)
+  są sprowadzane do formy bazowej przez Morfeusz 2, więc dostają te same
+  inicjały **w obrębie pliku** (każdy plik zaczyna z czystym cache).
+- **LOCATION** — pierwsza litera („Warszawa” → „W.”).
+- **PRODUCT** — pierwsza litera („Audi” → „A.”), dla wyrażeń wieloczłonowych
+  pierwsza litera + „(...)” („Super Ekstra Krem” → „S. (...)”).
+- **SENSITIVE** — zastąpienie „(...)”.
 
 ### Wyjątki
 
 Model **NIE** anonimizuje:
-- ❌ Sędziów i prokuratorów
-- ❌ Nazw sądów i instytucji publicznych
-- ❌ Ekspertów sądowych, biegłych (w kontekście)
 
+- ❌ sędziów i prokuratorów,
+- ❌ nazw sądów i instytucji publicznych,
+- ❌ ekspertów sądowych i biegłych (w kontekście).
 
 ---
 
@@ -51,170 +64,240 @@ Model **NIE** anonimizuje:
 ```
 anonymizer/
 │
-├── anonymizer.py                    # ⭐ Główny skrypt anonimizacji
-├── anon-test_runner2.py             # Skrypt testowy
-├── dataset.json                     # Dataset treningowy (1000+ przykładów)
-├── README.md                        # Ten plik
+├── anonymizer.py            # ⭐ Silnik: NER + Morfeusz 2 (CLI i API)
+├── anon-test_runner2.py     # Skrypt testowy silnika
+├── data/                    # Przykładowe dokumenty do anonimizacji
+├── test/                    # Dokumenty testowe (wyroki)
+├── ewaluacja/               # Materiały ewaluacyjne
 │
-├── anonymization-model/           # ⭐ Wytrenowany model (najnowszy)
-│       ├── config.json              # Konfiguracja modelu
-│       ├── pytorch_model.bin        # Wagi modelu (~500MB)
-│       ├── tokenizer_config.json    # Konfiguracja tokenizera
-│       ├── vocab.txt                # Słownik tokenów
-│       └── label_config.json        # Mapowanie etykiet
+├── anonymization-model/     # Wytrenowany model (poza repo — za duży)
+│   ├── config.json
+│   ├── model.safetensors
+│   ├── tokenizer_config.json
+│   ├── vocab.json / merges.txt
+│   └── label_config.json    # ⚠ wymagany — mapa etykiet dla silnika
 │
-├── colab/                           # Notebooki do treningu
-├── anon-test/                       # Dane testowe ze starego anonimizatora
-│   
-│
-└── data/                            # ⭐ Katalog z dokumentami do anonimizacji
-    ├── wyrok1.xml
-    ├── wyrok2.xml
-    ├── dokument.txt
-    └── output/                      # Pliki zanonimizowane (tworzone automatycznie)
-        ├── wyrok1_anon.xml
-        ├── wyrok2_anon.xml
-        └── dokument_anon.txt
+│                            # --- Web UI (Django) ---
+├── manage.py
+├── config/                  # settings (czyta .env), urls, wsgi/asgi
+├── dokumenty/               # aplikacja: modele, zadania, widoki, testy
+├── templates/  static/      # szablony i zasoby (HTMX lokalnie)
+├── requirements.txt         # zależności silnika + Web UI
+└── .env.example             # wzorzec konfiguracji
 ```
 
 ---
 
-## 🔧 Wymagania
+## 🔧 Wymagania i instalacja
 
-### Minimalne wymagania
-
-- **Python:** 3.8+
-- **RAM:** 8 GB (CPU) / 4 GB (GPU)
-- **Dysk:** 1 GB wolnego miejsca
-- **System:** Linux, macOS, Windows
-
-### Zależności Python
-
-```
-transformers>=4.30.0
-torch>=2.0.0
-scikit-learn>=1.0.0
-pandas>=1.5.0
-```
-
-### Opcjonalne (dla szybszego działania)
-
-- **GPU:** CUDA-compatible (NVIDIA)
-- **VRAM:** 4 GB+
-- **CUDA:** 11.7+ i cuDNN
-
----
-
-## 📦 Instalacja
-
-### 1. Sklonuj repozytorium
+- **Python:** 3.10+ (Django 5.2); sam silnik działa od 3.8
+- **RAM:** 8 GB (CPU) / 4 GB (GPU); **GPU** CUDA opcjonalnie
+- **Model:** katalog z wagami i `label_config.json` (silnik czyta z niego
+  mapę etykiet — bez tego pliku ładowanie modelu się nie powiedzie)
 
 ```bash
-git clone <url-repozytorium>
+git clone https://github.com/kwasiucionek/anonymizer.git
 cd anonymizer
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt   # Django, django-q2, transformers, torch, morfeusz2
 ```
 
-### 2. Zainstaluj zależności
-
-```bash
-pip install -r requirements.txt
-```
-
-Lub ręcznie:
-
-```bash
-pip install transformers torch scikit-learn pandas
-```
-
-### 3. Sprawdź instalację
+Szybki test silnika (pokaże pomoc CLI):
 
 ```bash
 python3 anonymizer.py
 ```
 
-Powinno wyświetlić się:
+---
+
+## 🚀 Użycie — CLI
+
+```bash
+python3 anonymizer.py <model_path> <plik|katalog> [opcje]
 ```
-Użycie: python3 anonymizer.py <model_path> <plik.xml|katalog> [--debug]
+
+**Opcje:**
+
+- `--test` — uruchom test modelu i inicjałów,
+- `--debug` — tryb debugowania z dodatkowymi informacjami,
+- `--shift N` — przesuń inicjały o N liter (domyślnie 0, bez przesunięcia).
+
+**Przykłady:**
+
+```bash
+# katalog plików .xml/.txt
+python3 anonymizer.py ./anonymization-model data/
+
+# pojedynczy plik z przesunięciem inicjałów o 2
+python3 anonymizer.py ./anonymization-model data/wyrok.xml --shift 2
 ```
+
+Wyniki lądują obok źródeł, w podkatalogu z sygnaturą czasu:
+`data/output_minimal_YYYYMMDD_HHMMSS/wyrok_anon.xml`.
+
+Testy silnika: `python3 anon-test_runner2.py`.
 
 ---
 
-## 🚀 Użycie - Anonimizacja
+## 🖥 Web UI (Django)
 
-### Podstawowe użycie
+Upload wielu plików `.xml`/`.txt`, przetwarzanie w tle z możliwością
+zatrzymania, masowe usuwanie zaznaczonych dokumentów, podgląd wyniku
+z blokami redakcyjnymi oraz surowy plik do skopiowania wprost z GUI,
+sprawy z wykazem wykrytych osób (scalanym po każdym dokumencie)
+i eksportem do JSON.
+
+### Architektura
+
+```
+przeglądarka ──> Django (gunicorn/runserver)   ← LEKKI proces, bez torch/morfeusz2
+                    │  zapis Document + async_task (broker ORM, po commicie)
+                    ▼
+                 django-q2 qcluster            ← TU ładuje się model NER
+                    │  leniwy singleton SimpleAnonymizer (raz na proces workera)
+                    ▼
+                 anonymizer.process_file (sam rozpoznaje .xml/.txt)
+                    │  wynik → FileField, statystyki → Document
+                    ▼
+                 Case.persons_cache (JSONField) ← wykaz osób scalany po przebiegu
+```
+
+Decyzje, które warto znać:
+
+- **Silnik importowany wyłącznie w workerze** — import `anonymizer` ładuje
+  transformers/torch i Morfeusz 2 (a konstruktor `SimpleAnonymizer` model
+  ~1,7 GB), więc web nie dotyka go nigdy. Brak zależności silnik kwituje
+  `sys.exit()` — `get_engine()` zamienia to na `RuntimeError`, dzięki czemu
+  dokument ląduje jako FAILED z czytelnym komunikatem zamiast cichej
+  śmierci workera.
+- **`Q_WORKERS=1` celowo** — każdy worker django-q2 to osobny proces
+  z własną kopią modelu w RAM/VRAM. Zwiększaj tylko świadomie.
+- **Broker ORM, bez Redisa** — kolejka w tej samej bazie; kolejkowanie przez
+  `transaction.on_commit`, żeby worker nie wystartował przed commitem.
+- **`Case.persons_cache` to WYKAZ, nie cache** — silnik nie przyjmuje cache
+  z zewnątrz i resetuje inicjały na początku każdego pliku, więc spójność
+  inicjałów obowiązuje w obrębie dokumentu. Po każdym przebiegu zbieramy
+  `entity_counter` silnika i scalamy do sprawy jako informacyjny wykaz
+  wykrytych osób (z eksportem do JSON).
+- **Media są chronione** — pobieranie idzie przez widoki z `login_required`;
+  katalogu `media/` **nie wystawiaj w nginx**.
+
+### Uruchomienie deweloperskie
 
 ```bash
-python3 anonymizer.py ./anonymization-model data/
+cp .env.example .env    # settings czytają .env automatycznie
+export DEBUG=1          # albo DEBUG=1 w .env
+python manage.py migrate
+python manage.py createsuperuser
+
+# terminal 1 — web
+python manage.py runserver
+
+# terminal 2 — worker (tu ładuje się model)
+python manage.py qcluster
 ```
 
-**Parametry:**
-- `./anonymization-model` - ścieżka do wytrenowanego modelu
-- `data/` - katalog z plikami `.xml` lub `.txt` do anonimizacji
-- `--debug` (opcjonalne) - tryb debugowania z dodatkowymi informacjami
+Bez GPU/modelu można rozwijać UI na sztucznym silniku z `dokumenty/tests.py`
+albo po prostu: `python manage.py test` (32 testy, torch niepotrzebny).
 
-### Przykłady
+### Zatrzymywanie przetwarzania
 
-#### 1. Anonimizacja wszystkich plików w katalogu
+- Dokument **oczekujący** znika z kolejki ORM natychmiast (status „Anulowany”).
+- Dokumentu **w trakcie** nie da się przerwać w połowie wywołania silnika
+  (`process_file` to jedno atomowe wejście, a ubicie procesu workera
+  oznaczałoby ponowne ładowanie modelu ~1,7 GB) — worker sprawdza flagę
+  kooperacyjnie przed i po wywołaniu: bieżący przebieg dokończy pracę,
+  ale jego **wynik zostaje odrzucony**, wykaz sprawy nietknięty, a dokument
+  ląduje jako „Anulowany”. W GUI widać wtedy fazę „Przerywanie…”.
+
+### Wdrożenie (systemd / nginx)
+
+`.env.example` → `/etc/anonymizer/env` (uzupełnij `SECRET_KEY`,
+`ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, `BEHIND_PROXY=1`, ścieżki).
+
+```ini
+# /etc/systemd/system/anonymizer-web.service
+[Unit]
+Description=Anonimizator Web UI
+After=network.target
+
+[Service]
+User=anonymizer
+WorkingDirectory=/opt/anonymizer
+EnvironmentFile=/etc/anonymizer/env
+ExecStart=/opt/anonymizer/.venv/bin/gunicorn config.wsgi:application \
+          --bind 127.0.0.1:44340 --workers 2 --timeout 60
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```ini
+# /etc/systemd/system/anonymizer-worker.service
+[Unit]
+Description=Anonimizator worker (django-q2, model NER)
+After=network.target
+
+[Service]
+User=anonymizer
+WorkingDirectory=/opt/anonymizer
+EnvironmentFile=/etc/anonymizer/env
+ExecStart=/opt/anonymizer/.venv/bin/python manage.py qcluster
+Restart=always
+# model + torch potrafią zjeść sporo pamięci przy starcie:
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target
+```
 
 ```bash
-python3 anonymizer.py ./anonymization-model data/
+python manage.py collectstatic --noinput
+systemctl enable --now anonymizer-web anonymizer-worker
 ```
 
-**Rezultat:**
-```
-data/wyrok1.xml  →  data/output/wyrok1_anon.xml
-data/wyrok2.xml  →  data/output/wyrok2_anon.xml
-data/tekst.txt   →  data/output/tekst_anon.txt
-```
+W nginx serwuj **tylko** `STATIC_ROOT` pod `/static/`; całą resztę (w tym
+pobieranie plików) proxuj do gunicorna. `media/` nie dostaje własnego
+`location` — dokumenty zawierają dane osobowe i wychodzą wyłącznie przez
+chronione widoki.
 
-#### 2. Anonimizacja pojedynczego pliku
+### Zmienne środowiskowe
 
-```bash
-python3 anonymizer.py ./anonymization-model data/wyrok.xml
-```
+Plik `.env` w katalogu projektu jest wczytywany automatycznie; zmienne
+z powłoki / systemd `EnvironmentFile` mają pierwszeństwo.
 
-#### 3. Tryb debugowania
+| Zmienna | Domyślnie | Opis |
+|---|---|---|
+| `SECRET_KEY` | — (wymagane przy `DEBUG=0`) | klucz Django |
+| `DEBUG` | `0` | tryb deweloperski |
+| `ALLOWED_HOSTS` | `localhost,127.0.0.1` | lista po przecinku |
+| `CSRF_TRUSTED_ORIGINS` | — | np. `https://anon.example.pl` |
+| `BEHIND_PROXY` | `0` | `1` za nginx/Cloudflare (X-Forwarded-Proto) |
+| `DB_NAME` (+USER/PASSWORD/HOST/PORT) | — | ustawione ⇒ PostgreSQL, puste ⇒ SQLite |
+| `MEDIA_ROOT`, `STATIC_ROOT` | katalog projektu | ścieżki plików |
+| `ANONYMIZER_ENGINE` | `anonymizer` | moduł silnika |
+| `ANONYMIZER_MODEL_PATH` | `./anonymization-modelv7/final` | katalog modelu (z `label_config.json`!) |
+| `ANONYMIZER_LETTER_SHIFT` | `0` | przesunięcie inicjałów (CLI `--shift`) |
+| `ANONYMIZER_MAX_UPLOAD_MB` | `20` | limit pojedynczego pliku |
+| `Q_WORKERS` / `Q_TIMEOUT` / `Q_RETRY` / `Q_SYNC` | `1 / 1800 / 2100 / 0` | kolejka django-q2 |
 
-```bash
-python3 anonymizer.py ./anonymization-model data/ --debug
-```
+### Pomysły na rozbudowę
 
-Wyświetla dodatkowe informacje o błędach i przetwarzaniu.
+- trwały cache osób w silniku (spójne inicjały między dokumentami sprawy),
+- diff oryginał↔wynik zamiast samego podglądu,
+- ZIP wyników całej sprawy,
+- API (DRF/ninja) do integracji z innymi systemami,
+- kolejka priorytetowa / osobna grupa dla dużych plików.
 
+---
 
+## 🎓 Trening modelu
 
-### Anonimizacja osób
+Model bazowy: **PKOBP/polish-roberta-8k**, fine-tuning do token classification
+najlepiej w **Google Colab** (darmowe GPU T4).
 
-Skrypt automatycznie przesuwa domyślne inicjały o określoną liczbę znaków (ustawienie LETTER_SHIFT = 2) co daje np. wynik:
-
-```xml
-<xAnon xSubst="L. M.">Jan Kowalski</xAnon>
-```
-
-
-## 🎓 Użycie - Testy
-
-```bash
-python3 anon-test_runner2.py
-```
-
-
-## 🎓 Użycie - Trening modelu
-
-### Przygotowanie środowiska
-
-Model najlepiej trenować w **Google Colab** (darmowe GPU):
-
-1. Przejdź do [Google Colab](https://colab.research.google.com/)
-2. Otwórz `colab/train_ner_model.ipynb`
-3. Runtime → Change runtime type → **GPU (T4)**
-4. Uruchom wszystkie komórki
-
-### Krok 1: Przygotowanie datasetu
-
-Edytuj plik `dataset.json` według formatu:
-
-**Przykładowy obiekt JSON:**
+### Format datasetu (BIO)
 
 ```json
 {
@@ -223,106 +306,33 @@ Edytuj plik `dataset.json` według formatu:
   "labels": ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "B-PERSON", "I-PERSON", "O", "O", "O", "O", "O", "B-ORG", "O", "O", "O", "O", "B-SENSITIVE", "O", "O", "O"]
 }
 ```
-```
 
-**Szczegóły:** Zobacz `ner_dataset_description.md`
-
-### Krok 2: Wgraj dataset do Colab
-
-W notebooku:
+### Hiperparametry wyjściowe
 
 ```python
-from google.colab import files
-uploaded = files.upload()  # Wybierz dataset.json
+MODEL_NAME    = "PKOBP/polish-roberta-8k"
+SIMPLE_MODE   = True     # 4 kategorie
+NUM_EPOCHS    = 10       # 8-15 optymalnie
+BATCH_SIZE    = 8        # 4-16
+LEARNING_RATE = 1e-5
+MAX_LENGTH    = 512
+TRAIN_SPLIT   = 0.8
 ```
 
-### Krok 3: Konfiguracja treningu
-
-Edytuj hiperparametry w notebooku:
-
-```python
-# ============================================================================
-# KONFIGURACJA
-# ============================================================================
-
-# Ścieżki
-DATASET_PATH = "dataset.json"
-OUTPUT_DIR = "./anonymization-model"
-
-# Model bazowy
-MODEL_NAME = "PKOBP/polish-roberta-8k"
-
-# Tryb (uproszczony z 4 kategoriami)
-SIMPLE_MODE = True
-
-# Hiperparametry
-NUM_EPOCHS = 10          # Liczba epok (8-15 optymalnie)
-BATCH_SIZE = 8           # Rozmiar batcha (4-16)
-LEARNING_RATE = 1e-5     # Współczynnik uczenia
-MAX_LENGTH = 512         # Maks. długość sekwencji
-
-# Podział danych
-TRAIN_SPLIT = 0.8        # 80% trening
-TEST_SPLIT = 0.2         # 20% test
-```
-
-### Krok 4: Uruchom trening
-
-Wykonaj wszystkie komórki notebooka. Proces obejmuje:
-
-1. ✅ Wczytanie datasetu
-2. ✅ Podział train/test (80/20)
-3. ✅ Tokenizacja
-4. ✅ Trening modelu (z early stopping)
-5. ✅ Ewaluacja
-6. ✅ Zapis najlepszego modelu
-7. ✅ Testy jakościowe
-
-### Krok 5: Pobierz wytrenowany model
-
-Notebook automatycznie spakuje i udostępni model do pobrania:
-
-```python
-# Pobieranie (ostatnia komórka)
-!zip -r anonymization_model.zip ./anonymization-model/final
-from google.colab import files
-files.download('anonymization_model.zip')
-```
-
-### Krok 6: Użyj nowego modelu
-
-Rozpakuj i użyj:
-
-```bash
-unzip anonymization_model.zip
-python3 anonymizer.py ./anonymization-model/final data/
-```
-
-### Monitorowanie treningu
-
-Podczas treningu zobaczysz:
+Przebieg treningu: wczytanie datasetu → podział 80/20 → tokenizacja →
+trening z early stopping → ewaluacja → zapis najlepszego checkpointu
+(najwyższy F1) → testy jakościowe. Przykładowy przebieg:
 
 ```
-🚀 ROZPOCZYNAM TRENING
-================================================================================
-
- [416/416 02:40, Epoch 8/8]
 Step  Training Loss  Validation Loss  Precision  Recall  F1      Accuracy
 50    0.3985        0.4354           0.5802     0.7633  0.6593  0.8428
-100   0.1113        0.2356           0.7337     0.8166  0.7730  0.9280
-150   0.0436        0.2436           0.7753     0.8166  0.7954  0.9367
 200   0.0291        0.2414           0.8075     0.8316  0.8193  0.9354
-250   0.0237        0.2592           0.8105     0.8849  0.8461  0.9417
-300   0.0184        0.2431           0.8387     0.8870  0.8622  0.9439
-350   0.0161        0.2455           0.8450     0.8721  0.8583  0.9458
 400   0.0077        0.2428           0.8665     0.8721  0.8693  0.9474
-
-================================================================================
-✅ TRENING ZAKOŃCZONY
-================================================================================
 ```
 
-**Najlepszy model** zostanie automatycznie zapisany (krok z najwyższym F1 Score).
+Po treningu spakuj katalog modelu (musi zawierać `label_config.json`),
+rozpakuj lokalnie i wskaż w `ANONYMIZER_MODEL_PATH` albo podaj w CLI:
 
----
-
+```bash
+python3 anonymizer.py ./anonymization-model/final data/
+```
