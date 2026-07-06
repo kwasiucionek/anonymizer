@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}{{ case.case_id }} — Anonimizator{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="detail-head">
+    <h1 class="card-title mono">{{ case.case_id }}</h1>
+    <a class="btn btn-ghost btn-sm" href="{% url 'dokumenty:sprawa-cache' case.pk %}">
+      Pobierz wykaz osób (JSON)
+    </a>
+  </div>
+  {% if case.description %}<p>{{ case.description }}</p>{% endif %}
+
+  <h2 class="section-title">Dokumenty sprawy</h2>
+  {% if documents %}
+  <form method="post" action="{% url 'dokumenty:dokumenty-usun-wybrane' %}"
+        onsubmit="return confirm('Usunąć zaznaczone dokumenty wraz z plikami?');">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="check-col">
+              <input type="checkbox" data-check-all aria-label="Zaznacz wszystkie">
+            </th>
+            <th>Plik</th>
+            <th>Sprawa</th>
+            <th>Status</th>
+            <th class="num">Encje</th>
+            <th class="num">Osoby</th>
+            <th class="num">Czas</th>
+            <th class="actions-col"><span class="sr-only">Akcje</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in documents %}
+            {% include "dokumenty/partials/_dokument_wiersz.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bulk-bar">
+      <button type="submit" class="btn btn-danger btn-sm">Usuń zaznaczone</button>
+      <span class="hint">Dokumenty w trakcie przetwarzania są pomijane —
+        najpierw je zatrzymaj.</span>
+    </div>
+  </form>
+  {% else %}
+  <p class="empty">Ta sprawa nie ma jeszcze dokumentów.</p>
+  {% endif %}
+
+  <h2 class="section-title">Wykaz wykrytych osób ({{ persons|length }})</h2>
+  <p class="hint">Scalany po każdym przetworzonym dokumencie. Silnik resetuje
+    inicjały na początku każdego pliku (spójność w obrębie dokumentu), więc
+    wykaz jest informacyjny — usunięcie wpisu porządkuje listę, ale nie wpływa
+    na ponowne przetwarzanie.</p>
+
+  {% if persons %}
+  <div class="table-wrap">
+    <table class="persons-table">
+      <thead>
+        <tr>
+          <th>Osoba (forma znormalizowana)</th>
+          <th>Inicjały</th>
+          <th class="actions-col"><span class="sr-only">Akcje</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for person, initials in persons %}
+        <tr>
+          <td class="mono">{{ person }}</td>
+          <td><mark class="redaction"><span class="subst">{{ initials }}</span></mark></td>
+          <td class="actions-col">
+            <form method="post" action="{% url 'dokumenty:sprawa-osoba-usun' case.pk %}">
+              {% csrf_token %}
+              <input type="hidden" name="person" value="{{ person }}">
+              <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">Wykaz jest pusty — wypełni się po przetworzeniu dokumentów.</p>
+  {% endif %}
+</section>
+{% endblock %}

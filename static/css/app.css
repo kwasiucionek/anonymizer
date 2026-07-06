@@ -1,0 +1,394 @@
+/* ==========================================================================
+   Anonimizator — Web UI
+   Kierunek: rejestr sądowy. Chłodny papier, atrament, fiolet sędziowski
+   jako jedyny akcent. Monospace niesie dane rejestrowe (sygnatury, pliki,
+   liczniki). Element podpisu: bloki redakcyjne w podglądzie wyniku.
+   ========================================================================== */
+
+:root {
+  --paper: #f3f4f1;
+  --surface: #ffffff;
+  --ink: #191b1e;
+  --muted: #5c6470;
+  --line: #d7dad3;
+  --accent: #4c3a78;        /* fiolet sędziowski */
+  --accent-dark: #3a2c5e;
+  --ok: #1e7a46;
+  --warn: #92640a;
+  --err: #a3312f;
+  --reveal: #f6e7c6;        /* tło odsłoniętych oryginałów */
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "DejaVu Sans Mono", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.mono { font-family: var(--mono); font-size: 0.92em; }
+.muted { color: var(--muted); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { color: var(--accent-dark); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Nagłówek: podwójna linia jak na formularzu urzędowym ---------------- */
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--ink);
+  box-shadow: 0 3px 0 0 var(--paper), 0 4px 0 0 var(--ink);
+  margin-bottom: 4px;
+}
+
+.topbar-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0.7rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand-block { color: var(--accent); margin-right: 0.45em; }
+
+.nav { display: flex; gap: 1.1rem; }
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.15rem 0;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.userbox {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.userbox form { margin: 0; }
+
+/* --- Układ ---------------------------------------------------------------- */
+
+.container { max-width: 68rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.4rem;
+}
+
+.card-title { margin: 0 0 0.9rem; font-size: 1.15rem; font-weight: 650; }
+.section-title {
+  margin: 1.8rem 0 0.6rem;
+  font-size: 0.78rem;
+  font-family: var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.detail-head .card-title { margin-bottom: 0; }
+
+.footer { border-top: 1px solid var(--line); }
+.footer .container { padding-top: 1rem; padding-bottom: 1.5rem; font-size: 0.8rem; }
+
+.empty { color: var(--muted); font-style: italic; }
+
+/* --- Komunikaty ----------------------------------------------------------- */
+
+.msg {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--muted);
+  background: var(--surface);
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  margin: 0 0 0.75rem;
+}
+.msg-success { border-left-color: var(--ok); }
+.msg-warning { border-left-color: var(--warn); }
+.msg-error   { border-left-color: var(--err); }
+
+.error-trace {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  max-height: 14rem;
+  overflow: auto;
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+/* --- Formularze ------------------------------------------------------------ */
+
+.form-grid { display: grid; gap: 1rem; }
+.upload-grid { grid-template-columns: 1fr 1fr; align-items: end; }
+.field-wide { grid-column: 1 / -1; }
+.field-submit { justify-self: start; }
+
+.field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.field input[type="text"],
+.field input[type="password"],
+.field select {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  font: inherit;
+  color: var(--ink);
+}
+.field input:focus, .field select:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.field input[type="file"] { font-family: var(--mono); font-size: 0.85rem; }
+
+.hint { font-size: 0.82rem; color: var(--muted); margin: 0.3rem 0 0; }
+
+/* --- Przyciski --------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.45rem 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--surface);
+  color: var(--accent);
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); color: #fff; }
+
+.btn-ghost { border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--muted); background: var(--surface); }
+
+.btn-danger { border-color: var(--err); color: var(--err); }
+.btn-danger:hover { background: color-mix(in srgb, var(--err) 8%, var(--surface)); }
+
+.btn-sm { padding: 0.25rem 0.65rem; font-size: 0.82rem; }
+
+.actions-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+.actions-row form { margin: 0; }
+
+/* --- Tabele ------------------------------------------------------------------ */
+
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+
+th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+td {
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.num { text-align: right; }
+.actions-col { text-align: right; white-space: nowrap; }
+.actions-col form { display: inline; }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+/* --- Statusy ------------------------------------------------------------------ */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.status-dot {
+  width: 0.55em; height: 0.55em;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-pending    { color: var(--warn); }
+.status-processing { color: var(--warn); }
+.status-done       { color: var(--ok); }
+.status-failed     { color: var(--err); }
+
+.status-processing .status-dot { animation: pulse 1.1s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-processing .status-dot { animation: none; }
+}
+
+/* --- Podgląd i bloki redakcyjne (element podpisu) ------------------------------ */
+
+.preview {
+  font-family: var(--mono);
+  font-size: 0.83rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  max-height: 34rem;
+  overflow: auto;
+  margin: 0;
+}
+
+.redaction {
+  font-family: var(--mono);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 2px;
+  padding: 0.05em 0.35em;
+}
+.redaction .orig { display: none; }
+
+/* Tryb weryfikacji: odsłonięte oryginały na ostrzegawczym tle */
+.preview.show-orig .redaction {
+  background: var(--reveal);
+  color: var(--ink);
+  outline: 1px dashed var(--warn);
+}
+.preview.show-orig .redaction .subst { display: none; }
+.preview.show-orig .redaction .orig { display: inline; }
+
+.persons-table td .redaction { font-size: 0.85rem; }
+
+/* --- Logowanie ------------------------------------------------------------------ */
+
+.login-wrap { display: flex; justify-content: center; padding-top: 3rem; }
+.login-card { width: 100%; max-width: 24rem; }
+
+/* --- Mobile ---------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .upload-grid { grid-template-columns: 1fr; }
+  .topbar-inner { gap: 0.9rem; }
+  .userbox { margin-left: 0; }
+  .container { padding: 1rem 0.8rem 2.5rem; }
+  .card { padding: 1rem; }
+}
+
+/* --- Zatrzymywanie i status „Anulowany” ------------------------------------ */
+
+.status-cancelled { color: var(--muted); }
+
+/* --- Masowe usuwanie (checkboxy) -------------------------------------------- */
+
+.check-col { width: 2.2rem; text-align: center; }
+.check-col input[type="checkbox"] { accent-color: var(--accent); width: 1rem; height: 1rem; }
+
+.bulk-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.bulk-bar .hint { margin: 0; }
+
+/* --- Wynik w GUI: przełącznik paneli + surowy plik --------------------------- */
+
+.seg { display: inline-flex; gap: 0; border: 1px solid var(--line); }
+.seg .btn { border: 0; border-radius: 0; }
+.seg .btn + .btn { border-left: 1px solid var(--line); }
+.seg .btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.panel-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.panel-bar .hint { margin: 0; flex: 1 1 24rem; }
+
+.preview.raw {
+  max-height: 65vh;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

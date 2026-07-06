@@ -1,0 +1,54 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Anonimizator{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="{% static 'js/htmx.min.js' %}" defer></script>
+  <script src="{% static 'js/app.js' %}" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="{% url 'dokumenty:pulpit' %}">
+      <span class="brand-block" aria-hidden="true">▮</span>ANONIMIZATOR
+    </a>
+    {% if user.is_authenticated %}
+    <nav class="nav" aria-label="Główna nawigacja">
+      <a href="{% url 'dokumenty:pulpit' %}"
+         {% if request.resolver_match.url_name == 'pulpit' %}aria-current="page"{% endif %}>Pulpit</a>
+      <a href="{% url 'dokumenty:sprawy' %}"
+         {% if 'sprawa' in request.resolver_match.url_name %}aria-current="page"{% endif %}>Sprawy</a>
+      {% if user.is_staff %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
+    </nav>
+    <div class="userbox">
+      <span class="mono muted">{{ user.username }}</span>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-ghost btn-sm">Wyloguj</button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<main class="container">
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %}
+    <p class="msg msg-{{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+  <div class="container mono muted">
+    Anonimizator dokumentów prawnych · model NER polish-roberta-8k
+  </div>
+</footer>
+</body>
+</html>

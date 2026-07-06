@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Sprawy — Anonimizator{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h1 class="card-title">Sprawy</h1>
+
+  {% if cases %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sygnatura</th>
+          <th class="num">Dokumenty</th>
+          <th class="num">Gotowe</th>
+          <th class="num">Osoby w cache</th>
+          <th>Utworzono</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in cases %}
+        <tr>
+          <td class="mono"><a href="{{ c.get_absolute_url }}">{{ c.case_id }}</a></td>
+          <td class="num mono">{{ c.documents_total }}</td>
+          <td class="num mono">{{ c.documents_done }}</td>
+          <td class="num mono">{{ c.person_count }}</td>
+          <td class="mono muted">{{ c.created|date:"Y-m-d" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty">Brak spraw. Sprawa powstaje przy wgrywaniu dokumentów —
+    podaj nową sygnaturę w formularzu na pulpicie.</p>
+  {% endif %}
+</section>
+{% endblock %}

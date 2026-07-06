@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}{{ d.original_name }} — Anonimizator{% endblock %}
+
+{% block content %}
+<section class="card"
+  {% if d.is_in_progress %}
+  hx-get="{% url 'dokumenty:dokument' d.pk %}"
+  hx-trigger="load delay:3s"
+  hx-select="main"
+  hx-target="closest main"
+  hx-swap="outerHTML"
+  {% endif %}>
+
+  <div class="detail-head">
+    <h1 class="card-title mono">{{ d.original_name }}</h1>
+    {% include "dokumenty/partials/_status_badge.html" %}
+  </div>
+
+  <dl class="meta-grid">
+    <div><dt>Sprawa</dt>
+      <dd>{% if d.case %}<a class="mono" href="{{ d.case.get_absolute_url }}">{{ d.case }}</a>{% else %}—{% endif %}</dd></div>
+    <div><dt>Wgrano</dt><dd class="mono">{{ d.created|date:"Y-m-d H:i" }}</dd></div>
+    <div><dt>Zakończono</dt><dd class="mono">{{ d.finished_at|date:"Y-m-d H:i"|default:"·" }}</dd></div>
+    <div><dt>Wykryte encje</dt><dd class="mono">{{ d.entity_count }}</dd></div>
+    <div><dt>Wykryte osoby</dt><dd class="mono">{{ d.person_count }}</dd></div>
+    <div><dt>Czas</dt><dd class="mono">{% if d.duration %}{{ d.duration }} s{% else %}·{% endif %}</dd></div>
+  </dl>
+
+  {% if d.status == 'failed' and d.error_message %}
+  <div class="msg msg-error">
+    <strong>Przetwarzanie nie powiodło się.</strong>
+    <pre class="error-trace">{{ d.error_message }}</pre>
+  </div>
+  {% endif %}
+
+  {% if d.is_stopping %}
+  <div class="msg msg-info">
+    Zażądano zatrzymania — bieżące wywołanie silnika dokończy pracę,
+    ale wynik zostanie odrzucony.
+  </div>
+  {% endif %}
+
+  <div class="actions-row">
+    <a class="btn btn-ghost" href="{% url 'dokumenty:dokument-oryginal' d.pk %}">Pobierz oryginał</a>
+    {% if d.status == 'done' %}
+      <a class="btn btn-primary" href="{% url 'dokumenty:dokument-wynik' d.pk %}">Pobierz wynik</a>
+    {% endif %}
+    {% if d.is_in_progress %}
+    <form method="post" action="{% url 'dokumenty:dokument-zatrzymaj' d.pk %}"
+          onsubmit="return confirm('Zatrzymać przetwarzanie tego dokumentu?');">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ d.get_absolute_url }}">
+      <button type="submit" class="btn btn-danger" {% if d.is_stopping %}disabled{% endif %}>
+        {% if d.is_stopping %}Zatrzymywanie…{% else %}Zatrzymaj{% endif %}
+      </button>
+    </form>
+    {% else %}
+    <form method="post" action="{% url 'dokumenty:dokument-ponow' d.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-ghost">Przetwórz ponownie</button>
+    </form>
+    <form method="post" action="{% url 'dokumenty:dokument-usun' d.pk %}"
+          onsubmit="return confirm('Usunąć dokument wraz z plikami?');">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Usuń</button>
+    </form>
+    {% endif %}
+  </div>
+</section>
+
+{% if preview %}
+<section class="card">
+  <div class="detail-head">
+    <h2 class="card-title">Wynik anonimizacji</h2>
+    <div class="seg" role="group" aria-label="Widok wyniku">
+      <button type="button" class="btn btn-ghost btn-sm active"
+              data-show="#panel-preview" aria-pressed="true">Podgląd</button>
+      <button type="button" class="btn btn-ghost btn-sm"
+              data-show="#panel-raw" aria-pressed="false">Surowy plik</button>
+    </div>
+  </div>
+
+  <div id="panel-preview">
+    <div class="panel-bar">
+      <p class="hint">Uproszczony podgląd tekstu (bez struktury XML). Bloki
+        <mark class="redaction"><span class="subst">J. K.</span></mark> to podmienione dane —
+        przełącznik odsłania wartości oryginalne.</p>
+      <button type="button" class="btn btn-ghost btn-sm" id="toggle-orig"
+              aria-pressed="false"
+              onclick="const p=document.getElementById('preview');
+                       p.classList.toggle('show-orig');
+                       const on=p.classList.contains('show-orig');
+                       this.setAttribute('aria-pressed', on);
+                       this.textContent = on ? 'Ukryj oryginały' : 'Pokaż oryginały';">
+        Pokaż oryginały
+      </button>
+    </div>
+    <pre class="preview" id="preview">{{ preview }}</pre>
+  </div>
+
+  <div id="panel-raw" hidden>
+    <div class="panel-bar">
+      <p class="hint">Dokładna zawartość pliku wynikowego
+        {% if truncated %}<strong>(skrócona do podglądu — pełny plik do pobrania)</strong>{% endif %} —
+        z tagami <code>&lt;xAnon&gt;</code>, gotowa do skopiowania.</p>
+      <button type="button" class="btn btn-ghost btn-sm" data-copy="#raw-output">
+        Kopiuj do schowka
+      </button>
+    </div>
+    <pre class="preview raw" id="raw-output">{{ raw_text }}</pre>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

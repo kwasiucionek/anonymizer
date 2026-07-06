@@ -8,11 +8,12 @@ env/
 
 
 # Dane i modele
+db.sqlite3
 *.json.bak
 *.bin
 *.pt
 *.safetensors
-anon-v3a/
+anonymization-model/
 
 
 # Streamlit

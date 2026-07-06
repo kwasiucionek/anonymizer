@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Pulpit — Anonimizator{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h1 class="card-title">Nowe dokumenty</h1>
+
+  {% if form.non_field_errors or form.files.errors %}
+  <div class="msg msg-error">
+    {{ form.non_field_errors }}{{ form.files.errors }}
+  </div>
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="form-grid upload-grid">
+    {% csrf_token %}
+    <div class="field field-wide">
+      <label for="{{ form.files.id_for_label }}">{{ form.files.label }}</label>
+      {{ form.files }}
+      <p class="hint">{{ form.files.help_text }}</p>
+    </div>
+    <div class="field">
+      <label for="{{ form.case.id_for_label }}">{{ form.case.label }}</label>
+      {{ form.case }}
+      <p class="hint">{{ form.case.help_text }}</p>
+    </div>
+    <div class="field">
+      <label for="{{ form.new_case_id.id_for_label }}">{{ form.new_case_id.label }}</label>
+      {{ form.new_case_id }}
+    </div>
+    <div class="field field-submit">
+      <button type="submit" class="btn btn-primary">Anonimizuj</button>
+    </div>
+  </form>
+</section>
+
+<section class="card">
+  <h2 class="card-title">Dokumenty</h2>
+
+  {% if page.object_list %}
+  <form method="post" action="{% url 'dokumenty:dokumenty-usun-wybrane' %}"
+        onsubmit="return confirm('Usunąć zaznaczone dokumenty wraz z plikami?');">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="check-col">
+              <input type="checkbox" data-check-all aria-label="Zaznacz wszystkie">
+            </th>
+            <th>Plik</th>
+            <th>Sprawa</th>
+            <th>Status</th>
+            <th class="num">Encje</th>
+            <th class="num">Osoby</th>
+            <th class="num">Czas</th>
+            <th class="actions-col"><span class="sr-only">Akcje</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in page.object_list %}
+            {% include "dokumenty/partials/_dokument_wiersz.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bulk-bar">
+      <button type="submit" class="btn btn-danger btn-sm">Usuń zaznaczone</button>
+      <span class="hint">Dokumenty w trakcie przetwarzania są pomijane —
+        najpierw je zatrzymaj.</span>
+    </div>
+  </form>
+
+  {% if page.paginator.num_pages > 1 %}
+  <nav class="pagination" aria-label="Stronicowanie">
+    {% if page.has_previous %}
+      <a class="btn btn-ghost btn-sm" href="?strona={{ page.previous_page_number }}">← Nowsze</a>
+    {% endif %}
+    <span class="mono muted">strona {{ page.number }} / {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}
+      <a class="btn btn-ghost btn-sm" href="?strona={{ page.next_page_number }}">Starsze →</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <p class="empty">Brak dokumentów. Wgraj pliki .xml lub .txt powyżej, aby zacząć.</p>
+  {% endif %}
+</section>
+{% endblock %}

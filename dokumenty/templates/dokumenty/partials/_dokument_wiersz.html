@@ -1,0 +1,36 @@
+<tr id="dok-{{ d.pk }}"
+    {% if d.is_in_progress %}
+    hx-get="{% url 'dokumenty:dokument-wiersz' d.pk %}"
+    hx-trigger="load delay:2s"
+    hx-swap="outerHTML"
+    {% endif %}>
+  <td class="check-col">
+    {# hx-preserve: zaznaczenie przeżywa podmianę wiersza przy pollingu #}
+    <input type="checkbox" name="dokumenty" value="{{ d.pk }}"
+           id="dok-check-{{ d.pk }}" hx-preserve
+           aria-label="Zaznacz {{ d.original_name }}">
+  </td>
+  <td class="mono"><a href="{{ d.get_absolute_url }}">{{ d.original_name }}</a></td>
+  <td>
+    {% if d.case %}
+      <a class="mono" href="{{ d.case.get_absolute_url }}">{{ d.case }}</a>
+    {% else %}<span class="muted">—</span>{% endif %}
+  </td>
+  <td>{% include "dokumenty/partials/_status_badge.html" %}</td>
+  <td class="num mono">{% if d.status == 'done' %}{{ d.entity_count }}{% else %}·{% endif %}</td>
+  <td class="num mono">{% if d.status == 'done' %}{{ d.person_count }}{% else %}·{% endif %}</td>
+  <td class="num mono">{% if d.duration %}{{ d.duration }} s{% else %}·{% endif %}</td>
+  <td class="actions-col">
+    {% if d.status == 'done' %}
+      <a class="btn btn-ghost btn-sm" href="{% url 'dokumenty:dokument-wynik' d.pk %}">Pobierz wynik</a>
+    {% elif d.is_in_progress and not d.is_stopping %}
+      <button type="button" class="btn btn-ghost btn-sm btn-stop"
+              hx-post="{% url 'dokumenty:dokument-zatrzymaj' d.pk %}"
+              hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+              hx-target="#dok-{{ d.pk }}" hx-swap="outerHTML"
+              hx-confirm="Zatrzymać przetwarzanie „{{ d.original_name }}”?">
+        Zatrzymaj
+      </button>
+    {% endif %}
+  </td>
+</tr>

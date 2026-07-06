@@ -1,0 +1,9 @@
+{% if d.is_stopping %}
+<span class="status status-processing">
+  <span class="status-dot" aria-hidden="true"></span>Przerywanie…
+</span>
+{% else %}
+<span class="status status-{{ d.status }}">
+  <span class="status-dot" aria-hidden="true"></span>{{ d.get_status_display }}
+</span>
+{% endif %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Logowanie — Anonimizator{% endblock %}
+
+{% block content %}
+<div class="login-wrap">
+  <section class="card login-card">
+    <h1 class="card-title">Logowanie</h1>
+    <p class="muted">Dokumenty zawierają dane osobowe — dostęp wymaga konta.</p>
+
+    {% if form.errors %}
+    <p class="msg msg-error">Nieprawidłowa nazwa użytkownika lub hasło.</p>
+    {% endif %}
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+      <div class="field">
+        <label for="{{ form.username.id_for_label }}">Użytkownik</label>
+        {{ form.username }}
+      </div>
+      <div class="field">
+        <label for="{{ form.password.id_for_label }}">Hasło</label>
+        {{ form.password }}
+      </div>
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn btn-primary">Zaloguj</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

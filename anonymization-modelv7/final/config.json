@@ -1,0 +1,58 @@
+{
+  "architectures": [
+    "RobertaForTokenClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "auto_map": {
+    "AutoConfig": "configuration_roberta.RobertaConfig",
+    "AutoModel": "modeling_roberta.RobertaModel",
+    "AutoModelForCausalLM": "modeling_roberta.RobertaForCausalLM",
+    "AutoModelForMaskedLM": "modeling_roberta.RobertaForMaskedLM",
+    "AutoModelForMultipleChoice": "modeling_roberta.RobertaForMultipleChoice",
+    "AutoModelForQuestionAnswering": "modeling_roberta.RobertaForQuestionAnswering",
+    "AutoModelForSequenceClassification": "modeling_roberta.RobertaForSequenceClassification",
+    "AutoModelForTokenClassification": "modeling_roberta.RobertaForTokenClassification"
+  },
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "dtype": "float32",
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 1024,
+  "id2label": {
+    "0": "O",
+    "1": "B-PERSON",
+    "2": "I-PERSON",
+    "3": "B-LOCATION",
+    "4": "I-LOCATION",
+    "5": "B-PRODUCT",
+    "6": "I-PRODUCT",
+    "7": "B-SENSITIVE",
+    "8": "I-SENSITIVE"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 4096,
+  "label2id": {
+    "B-LOCATION": 3,
+    "B-PERSON": 1,
+    "B-PRODUCT": 5,
+    "B-SENSITIVE": 7,
+    "I-LOCATION": 4,
+    "I-PERSON": 2,
+    "I-PRODUCT": 6,
+    "I-SENSITIVE": 8,
+    "O": 0
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 8194,
+  "model_type": "roberta",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 24,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "transformers_version": "4.57.0",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 128064
+}
