@@ -102,6 +102,11 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt   # Django, django-q2, transformers, torch, morfeusz2
 ```
 
+> ⚠️ **transformers przypięty do 4.x.** Transformers v5 przebudował
+> tokenizację i zmienił domyślny dtype — model NER trenowany pod 4.x
+> generuje na v5 masowe fałszywe wykrycia (np. „WYROK" → „W.").
+> Aktualizacja do v5 wymaga ponownej walidacji modelu.
+
 Szybki test silnika (pokaże pomoc CLI):
 
 ```bash

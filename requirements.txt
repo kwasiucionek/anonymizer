@@ -4,9 +4,14 @@ django-q2>=1.7
 gunicorn>=23.0
 
 # --- Silnik anonimizacji (anonymizer.py) ---
-transformers>=4.30.0
+# UWAGA: transformers przypięty <5 — v5 (XII 2025) przebudował tokenizację
+# i zmienił domyślny dtype; model trenowany pod 4.x daje na v5 masowe
+# fałszywe wykrycia (np. „WYROK" → „W."). Nie podnoś bez walidacji modelu.
+transformers>=4.30.0,<5.0
 torch>=2.0.0
 morfeusz2>=1.9
+sentencepiece>=0.2
+protobuf>=4.0
 # Uwaga: katalog modelu musi zawierać label_config.json
 
 # --- PostgreSQL (opcjonalnie; domyślnie SQLite) ---
