@@ -10,7 +10,7 @@ zatrzymywanie, podgląd wyników, sprawy z wykazem osób).
 **Demo:** [anonymizer.cytr.us](https://anonymizer.cytr.us)
 
 **Login:** demo
-**Hasło:** demo
+**Hasło:** anonymizer_demo
 
 
 ## 🎯 Charakterystyka
