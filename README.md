@@ -7,12 +7,6 @@ oraz **Morfeusz 2** do normalizacji odmian nazwisk. Dostępny jako skrypt CLI
 zatrzymywanie, podgląd wyników, sprawy z wykazem osób).
 
 
-**Demo:** [anonymizer.cytr.us](https://anonymizer.cytr.us)
-
-**Login:** demo
-**Hasło:** anonymizer_demo
-
-
 ## 🎯 Charakterystyka
 
 ### Rozpoznawane encje
